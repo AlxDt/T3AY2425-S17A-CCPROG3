@@ -1,0 +1,5 @@
+Practice Exercise: Basketball
+
+Write a program that asks for the score obtained by the Green Archers and Blue Eagles in a basketball game for each quarter (there are four quarters in total in a basketball game). Note that for each quarter the program should ask for the number of points obtained in that quarter only, not the total score after that quarter.
+
+After four quarters, output the winner. If it’s a tie, the program should say Overtime! and then ask for the number of points obtained by each team for the overtime round.
