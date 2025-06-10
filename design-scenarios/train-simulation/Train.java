@@ -5,19 +5,19 @@ public class Train {
     private ArrayList<Passenger> passengers;
     private Station currentStation;
 
-    public Train(
-        int capacity,
-        ArrayList<Passenger> passengers,
-        Station currentStation
-    ) {
+    public Train(int capacity) {
         this.capacity = capacity;
         // This is how you create a passenger array list
         this.passengers = new ArrayList<>();
-        this.currentStation = currentStation;
+        this.currentStation = null;
     }
 
     public Station getCurrentStation() {
         return this.currentStation;
+    }
+
+    public void setCurrentStation(Station currentStation) {
+        this.currentStation = currentStation;
     }
 
     public void arrive(Station station) {
