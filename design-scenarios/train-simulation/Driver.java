@@ -9,5 +9,18 @@ public class Driver {
         Station ortigas = new Station("Ortigas");
         Station bgc = new Station("BGC");
         Station makati = new Station("Makati");
+        
+        // Link the stations with each other
+        manila.setNextStation(ortigas);
+        ortigas.setNextStation(bgc);
+        bgc.setNextStation(makati);
+        makati.setNextStation(manila);
+
+        // Display all stations
+        // When you print an object, it internally uses the toString() method of that object
+        System.out.println(manila);
+        System.out.println(ortigas);
+        System.out.println(bgc);
+        System.out.println(makati);
     } 
 }
