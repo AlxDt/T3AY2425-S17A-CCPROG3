@@ -52,27 +52,37 @@ public class Station {
         this.train = train;
     }
 
+    public Station getNextStation() {
+        return this.nextStation;
+    }
+
     public void setNextStation(Station nextStation) {
         this.nextStation = nextStation;
     }
 
-    public void setPassengers(ArrayList<Passenger> passengers) {
-        this.passengers = passengers;
+    public ArrayList<Passenger> getPassengers() {
+        return this.passengers;
     }
 
     @Override
     public String toString() {
         // Return the String representation of this object
-        // Build the String used to display the representation of this object
         String displayString = "";
 
+        // Display the indicator for whether the train is in the station
         if (this.train != null) {
             displayString += "> ";
         } else {
             displayString += "  ";
         }
 
-        displayString += this.name;
+        // Display the name of the station
+        displayString += String.format("%-20s", this.name);
+
+        // Display the passengers of the station
+        for (Passenger passenger : this.passengers) {
+            displayString += passenger;
+        }
 
         return displayString;
     }
