@@ -13,7 +13,7 @@ public class Main {
             System.out.println("2. Deposit");
             System.out.println("3. Withdraw");
             System.out.println("4. Display all accounts");
-            System.out.println("5. Display transaction history");
+            System.out.println("5. Display all transactions");
             System.out.println("6. Exit");
             System.out.print("Select option: ");
 
@@ -30,13 +30,18 @@ public class Main {
                     System.out.print("Enter holder name: ");
                     String name = scanner.nextLine();
 
-                    // TODO: [M1] Add a bank account with the necessary details to the bank
+                    // TODO: [M1] Add a bank account with the necessary details to the bank,
+                    // but only if the account number doesn't already exist yet
+
+                    if () {
 
 
+                        System.out.println("Account created successfully.");
+                    } else {
+                        System.out.println("Account number already exists.");
+                    }
 
                     // END M1
-
-                    System.out.println("Account created successfully.");
 
                     break;
                 case 2:
@@ -91,7 +96,6 @@ public class Main {
                     // TODO: [M6] Display all accounts of the bank without using print statements.
 
 
-
                     // END M6
 
                     break;
@@ -99,11 +103,21 @@ public class Main {
                     System.out.print("Enter account number: ");
                     accNum = scanner.nextLine();
 
-                    // TODO: [M7] Display all transactions given the account number.
+                    // TODO: [M7] Find the account using the given account number.
 
-                    
+
 
                     // END M7
+
+                    if (acc != null) {
+                        // TODO: [M8] Display all transactions given the account number.
+                        
+
+    
+                        // END M8
+                    } else {
+                        System.out.println("Account not found.");
+                    }
 
                     break;
                 case 6:

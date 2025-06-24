@@ -13,8 +13,6 @@ public class BankAccount {
     // - Set the balance to 0
     // - Initialize the empty transactions
 
-    
-
     // END A1
 
     // TODO: [A2] Create a getter for the account number
