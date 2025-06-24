@@ -9,9 +9,9 @@ public class Transaction {
     // The constructor should:
     // - Assign the type
     // - Assign the amount
-    // - Initialize the timestamp to the following value: LocalDateTime.now() (you don't need to know the details)
+    // - Initialize the timestamp to the following value: LocalDateTime.now() (you don't need to know the details of what it does)
 
-
+    
 
     // END T1
 

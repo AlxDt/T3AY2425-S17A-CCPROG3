@@ -13,11 +13,14 @@ public class Main {
             System.out.println("2. Deposit");
             System.out.println("3. Withdraw");
             System.out.println("4. Display all accounts");
-            System.out.println("5. Exit");
+            System.out.println("5. Display transaction history");
+            System.out.println("6. Exit");
             System.out.print("Select option: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
+
+            BankAccount acc;
 
             switch (choice) {
                 case 1:
@@ -50,7 +53,7 @@ public class Main {
                         System.out.print("Enter amount to deposit: ");
                         double amount = scanner.nextDouble();
 
-                        if (/* TODO: [M2] Using the account, deposit to it the given amount. */) {
+                        if (/* TODO: [M3] Using the account, deposit to it the given amount. */) {
                             System.out.println("Deposit successful.");
                         } else {
                             System.out.println("Invalid amount.");
@@ -64,17 +67,17 @@ public class Main {
                     System.out.print("Enter account number: ");
                     accNum = scanner.nextLine();
 
-                    // TODO: [M3] Find the account using the given account number.
+                    // TODO: [M4] Find the account using the given account number.
 
 
 
-                    // END M3
+                    // END M4
 
                     if (acc != null) {
                         System.out.print("Enter amount to withdraw: ");
                         double amount = scanner.nextDouble();
 
-                        if (/* TODO: [M3] Using the account, withdraw from it the given amount. */) {
+                        if (/* TODO: [M5] Using the account, withdraw from it the given amount. */) {
                             System.out.println("Withdrawal successful.");
                         } else {
                             System.out.println("Invalid amount or insufficient balance.");
@@ -85,14 +88,25 @@ public class Main {
 
                     break;
                 case 4:
-                    // TODO: [M4] Display all accounts of the bank.
+                    // TODO: [M6] Display all accounts of the bank without using print statements.
 
 
 
-                    // END M4
+                    // END M6
 
                     break;
                 case 5:
+                    System.out.print("Enter account number: ");
+                    accNum = scanner.nextLine();
+
+                    // TODO: [M7] Display all transactions given the account number.
+
+                    
+
+                    // END M7
+
+                    break;
+                case 6:
                     running = false;
 
                     System.out.println("Thank you for using the bank system.");
