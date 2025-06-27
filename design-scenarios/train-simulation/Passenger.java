@@ -23,7 +23,21 @@ public class Passenger {
     // If the Passenger's destination is BGC, toString() should return the string "3"
     // If the Passenger's destination is Makati, toString() should return the string "4"
 
-    // ???
+    @Override
+    public String toString() {
+        switch (this.destination.getName()) {
+            case "Manila":
+                return "1";
+            case "Ortigas":
+                return "2";
+            case "BGC":
+                return "3";
+            case "Makati":
+                return "4";
+            default:
+                return "";
+        }
+    }
 
     // END #2
 }

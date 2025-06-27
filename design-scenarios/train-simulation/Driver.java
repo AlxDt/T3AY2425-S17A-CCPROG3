@@ -97,7 +97,13 @@ public class Driver {
         // For instance:
         // stations[0] should be Manila,
         // stations[1] should be Ortigas, etc.
-        Station[] stations = /* ??? */;
+        Station[] stations = 
+        {
+            manila,
+            ortigas,
+            bgc,
+            makati
+        };
         // END #3
 
         return stations;
@@ -108,7 +114,9 @@ public class Driver {
     // Make sure that the toString() of Station is used - don't implement your displaying
     // logic in here.
     private static void displayStations(Station[] stations) {
-        // ???
+        for (Station station : stations) {
+            System.out.println(station);
+        }
     }
     // END #4
 
@@ -154,7 +162,8 @@ public class Driver {
 
         // Make sure that there was a destination station set
         if (destinationStation != null) {
-            if (/* TODO: #5 [2 pts] - Check if the origin and destination stations are the same - fill out this condition so that this scenario will not be allowed!*/) {
+            if (/* TODO: #5 [2 pts] - Check if the origin and destination stations are the same - fill out this condition so that this scenario will not be allowed!*/
+                    originStation.getName().equals(destinationStation.getName())) {
                 System.out.println("The origin and destination may not be the same.");
                 System.out.println("Press Enter to continue...");
 
@@ -164,7 +173,8 @@ public class Driver {
                 // Create a new passenger object with the given destination station above.
                 // Afterwards, add that passenger to the list of passengers in the origin station.
 
-                // ???
+                Passenger passenger = new Passenger(destinationStation);
+                originStation.getPassengers().add(passenger);
 
                 // END #6
             }

@@ -29,7 +29,9 @@ public class Train {
     // You are free to add more code around the existing code, but you may not change it, nor can you
     // modify the method itself.
     public void move() {
+        this.currentStation.setTrain(null);
         this.currentStation = currentStation.getNextStation();
+        this.currentStation.setTrain(this);
     }
     // END #1
 
