@@ -19,8 +19,6 @@ public class Station {
         this.passengers = new ArrayList<>();
         this.nextStation = null;
 
-        // How do I assign the current station to the train
-        // this.train can be null!!!
         // We need to guard setCurrentStation() against the scenario when this.train is null
         if (this.train != null) {
             // We can only set the current station of the train when the train exists

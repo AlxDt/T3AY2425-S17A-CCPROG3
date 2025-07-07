@@ -92,11 +92,6 @@ public class Driver {
         bgc.setNextStation(makati);
         makati.setNextStation(manila);
         
-        // TODO: #3 [2 pts]
-        // Save the assembled stations above to an array. Make sure to save them in order.
-        // For instance:
-        // stations[0] should be Manila,
-        // stations[1] should be Ortigas, etc.
         Station[] stations = 
         {
             manila,
@@ -104,21 +99,15 @@ public class Driver {
             bgc,
             makati
         };
-        // END #3
 
         return stations;
     }
 
-    // TODO: #4 [3 pts]
-    // Implement the method body to print each station in the given stations array.
-    // Make sure that the toString() of Station is used - don't implement your displaying
-    // logic in here.
     private static void displayStations(Station[] stations) {
         for (Station station : stations) {
             System.out.println(station);
         }
     }
-    // END #4
 
     // Clears the screen on terminals which support ANSI escape codes.
     // This may work on your terminal but probably not on the terminal of your IDE.
@@ -157,26 +146,26 @@ public class Driver {
                 destinationStation = stations[destinationNumber - 1];
 
                 break;
-            // If invalid input, just cancel the adding of the passenger
+            default:
+                // If invalid input, just cancel the adding of the passenger
+                System.out.println("Invalid input. Passenger adding canceled.");
+                System.out.println("Press Enter to continue...");
+
+                scanner.nextLine();
+
+                break;
         }
 
         // Make sure that there was a destination station set
         if (destinationStation != null) {
-            if (/* TODO: #5 [2 pts] - Check if the origin and destination stations are the same - fill out this condition so that this scenario will not be allowed!*/
-                    originStation.getName().equals(destinationStation.getName())) {
+            if (originStation.getName().equals(destinationStation.getName())) {
                 System.out.println("The origin and destination may not be the same.");
                 System.out.println("Press Enter to continue...");
 
                 scanner.nextLine();
             } else {
-                // TODO: #6 [3 pts]
-                // Create a new passenger object with the given destination station above.
-                // Afterwards, add that passenger to the list of passengers in the origin station.
-
                 Passenger passenger = new Passenger(destinationStation);
                 originStation.getPassengers().add(passenger);
-
-                // END #6
             }
         }
     }
