@@ -1,7 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Driver {
-    public static void main(String[] args) throws InterruptedException {
+    private static final int NUMBER_OF_STATIONS = 4;
+    private static Random randomizer = new Random();
+
+    public static void main(String[] args) {
         // Create the train
         Train train = new Train(10);
 
@@ -35,6 +39,7 @@ public class Driver {
                 System.out.println("[2] Add passengers in Ortigas");
                 System.out.println("[3] Add passengers in BGC");
                 System.out.println("[4] Add passengers in Makati");
+                System.out.println("[R] Add a passenger randomly");
                 System.out.println("[X] End simulation");
                 System.out.println();
                 System.out.print("Or enter a blank line to proceed to the next tick: ");
@@ -47,13 +52,23 @@ public class Driver {
                     case "2":
                     case "3":
                     case "4":
-                        int originStationNumber = Integer.parseInt(response);
-                        Station originStation = stations[originStationNumber - 1];
+                        int originNumber = Integer.parseInt(response);
+                        Station originStation = stations[originNumber - 1];
 
                         // Add a passenger at the station chosen by the user
                         addPassenger(
                             scanner,
                             originStation,
+                            stations);
+
+                        break;
+                    case "R":
+                        int randomOriginNumber = Driver.randomizer.nextInt(Driver.NUMBER_OF_STATIONS) + 1;
+                        Station randomOriginStation = stations[randomOriginNumber - 1];
+
+                        // Add a passenger at a random station
+                        addPassenger(
+                            randomOriginStation,
                             stations);
 
                         break;
@@ -118,6 +133,23 @@ public class Driver {
     }
 
     private static void addPassenger(
+        Station originStation,
+        Station[] stations
+    ) {
+        int randomDestinationNumber;
+        Station randomDestinationStation;
+        
+        do {
+            randomDestinationNumber = Driver.randomizer.nextInt(NUMBER_OF_STATIONS) + 1;
+            randomDestinationStation = stations[randomDestinationNumber - 1];
+        }
+        while (originStation.getName().equals(randomDestinationStation.getName()));
+        
+        Passenger passenger = new Passenger(randomDestinationStation);
+        originStation.getPassengers().add(passenger);
+    }
+
+    private static void addPassenger(
         Scanner scanner,
         Station originStation,
         Station[] stations
@@ -131,19 +163,30 @@ public class Driver {
         System.out.println("[2] Ortigas");
         System.out.println("[3] BGC");
         System.out.println("[4] Makati");
+        System.out.println("[R] Randomly choose a destination");
         System.out.println();
 
         // Process the input
         String destination = scanner.nextLine();
         Station destinationStation = null;
 
-        switch (destination) {
+        switch (destination.toUpperCase()) {
             case "1":
             case "2":
             case "3":
             case "4":
                 int destinationNumber = Integer.parseInt(destination);
                 destinationStation = stations[destinationNumber - 1];
+
+                break;
+            case "R":
+                int randomDestinationNumber;
+                
+                do {
+                    randomDestinationNumber = Driver.randomizer.nextInt(NUMBER_OF_STATIONS) + 1;
+                    destinationStation = stations[randomDestinationNumber - 1];
+                }
+                while (originStation.getName().equals(destinationStation.getName()));
 
                 break;
             default:
