@@ -9,7 +9,13 @@ public class Passenger {
         return this.destination;
     }
 
+    public bool tryBoard(Train train) {
+    }
+
     public void board(Train train) {
+    }
+
+    public bool tryAlight(Train train) {
     }
 
     public void alight(Train train) {

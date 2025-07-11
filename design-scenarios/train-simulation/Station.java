@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Station {
     private String name;
     private Train train;
-    private ArrayList<Passenger> passengers;
+    private Queue<Passenger> passengers;
     private Station nextStation;
 
     // 1st constructor
@@ -16,7 +18,7 @@ public class Station {
     ) {
         this.name = name;
         this.train = train;
-        this.passengers = new ArrayList<>();
+        this.passengers = new LinkedList<>();
         this.nextStation = null;
 
         // We need to guard setCurrentStation() against the scenario when this.train is null
@@ -58,7 +60,7 @@ public class Station {
         this.nextStation = nextStation;
     }
 
-    public ArrayList<Passenger> getPassengers() {
+    public Queue<Passenger> getPassengers() {
         return this.passengers;
     }
 

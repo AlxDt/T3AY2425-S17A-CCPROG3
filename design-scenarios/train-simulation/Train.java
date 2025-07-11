@@ -20,14 +20,14 @@ public class Train {
     }
 
     public void move() {
-        this.currentStation.setTrain(null);
         this.currentStation = currentStation.getNextStation();
+    }
+    
+    public void arrive() {
         this.currentStation.setTrain(this);
     }
-
-    public void arrive(Station station) {
-    }
-
+    
     public void depart() {
+        this.currentStation.setTrain(null);
     }
 }

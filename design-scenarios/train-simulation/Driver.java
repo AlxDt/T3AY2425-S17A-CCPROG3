@@ -84,7 +84,14 @@ public class Driver {
 
             // Make the train move
             if (!isDone) {
+                // The train departs from the current station
+                train.depart();
+                
+                // The train moves to the next station
                 train.move();
+                
+                // The train arrives at the current station
+                train.arrive();
             }
         }
         while (!isDone);
