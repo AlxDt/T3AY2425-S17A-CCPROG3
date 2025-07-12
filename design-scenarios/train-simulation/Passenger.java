@@ -9,18 +9,33 @@ public class Passenger {
         return this.destination;
     }
 
-    public bool tryBoard(Train train) {
+    public boolean tryBoard(Train train) {
+        if (train.getPassengers().size() + 1 <= train.getCapacity()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void board(Train train) {
+    public void board(Train train) {//add itself
+        train.getCurrentStation().getPassengers().remove(this);
+        train.getPassengers().add(this);
     }
 
-    public bool tryAlight(Train train) {
+    public boolean tryAlight(Train train) { 
+        Station currentDestination = train.getCurrentStation();
+        if (destination == currentDestination) { 
+            return true;
+        } else {
+            return false; 
+        }
     }
 
     public void alight(Train train) {
+        train.getPassengers().remove(this);
     }
 
+        
     @Override
     public String toString() {
         switch (this.destination.getName()) {

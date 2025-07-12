@@ -6,7 +6,7 @@ public class Station {
     private String name;
     private Train train;
     private Queue<Passenger> passengers;
-    private Station nextStation;
+    private Station nextStation; 
 
     // 1st constructor
     // You need:

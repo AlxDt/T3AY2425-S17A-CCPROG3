@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ public class Driver {
 
     public static void main(String[] args) {
         // Create the train
-        Train train = new Train(10);
+        Train train = new Train(3);
 
         // Create the stations
         Station[] stations = assembleStations(train); 
@@ -92,6 +93,37 @@ public class Driver {
                 
                 // The train arrives at the current station
                 train.arrive();
+
+                // For each passengers in the train, have them check if they are
+                // ready to alight
+                // If they are, then alight
+                ArrayList<Passenger> passengersToAlight = new ArrayList<>();
+
+                for (Passenger passenger: train.getPassengers()) { //Check the comment above
+                    if (passenger.tryAlight(train)){
+                        //passenger.alight(train);
+                        passengersToAlight.add(passenger);
+                    }  
+                }
+
+                for (Passenger passengerToAlight : passengersToAlight) {
+                    passengerToAlight.alight(train);
+                }
+
+                ArrayList<Passenger> passengersToBoard = new ArrayList<>();
+
+                // For each passenger in the queue (in order), have them check if they are
+                // ready to alight
+                for (Passenger passenger : train.getCurrentStation().getPassengers()) {
+                    if (passenger.tryBoard(train)) {
+                        passengersToBoard.add(passenger);
+                    }
+                }
+
+                for (Passenger passengerToBoard : passengersToBoard) {
+                    passengerToBoard.board(train);
+                }
+                
             }
         }
         while (!isDone);
@@ -207,7 +239,7 @@ public class Driver {
         }
 
         // Make sure that there was a destination station set
-        if (destinationStation != null) {
+        if (destinationStation != null) { 
             if (originStation.getName().equals(destinationStation.getName())) {
                 System.out.println("The origin and destination may not be the same.");
                 System.out.println("Press Enter to continue...");
