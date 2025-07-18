@@ -38,4 +38,11 @@ public class Train {
     public ArrayList<Passenger> getPassengers(){
         return this.passengers;
     }
+
+    @Override
+    public String toString() {
+        String loadFactor = this.passengers.size() + "/" + this.CAPACITY;
+
+        return String.format("%-9s", loadFactor) + ">";
+    }
 }

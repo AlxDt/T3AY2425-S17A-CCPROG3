@@ -1,8 +1,7 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Station {
+public class Station extends Object {
     private String name;
     private Train train;
     private Queue<Passenger> passengers;
@@ -71,9 +70,12 @@ public class Station {
 
         // Display the indicator for whether the train is in the station
         if (this.train != null) {
-            displayString += "> ";
+            // operator overloading
+            // in this case, the += operator is overloaded
+            // meaning, something other than its original behavior is used
+            displayString += train;
         } else {
-            displayString += "  ";
+            displayString += String.format("%-10s", " ");
         }
 
         // Display the name of the station

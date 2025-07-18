@@ -9,8 +9,8 @@ public class Passenger {
         return this.destination;
     }
 
-    public boolean tryBoard(Train train) {
-        if (train.getPassengers().size() + 1 <= train.getCapacity()) {
+    public boolean tryBoard(Train train, int load) {
+        if (load + 1 <= train.getCapacity()) {
             return true;
         } else {
             return false;

@@ -8,7 +8,7 @@ public class Driver {
 
     public static void main(String[] args) {
         // Create the train
-        Train train = new Train(3);
+        Train train = new Train(10);
 
         // Create the stations
         Station[] stations = assembleStations(train); 
@@ -85,15 +85,6 @@ public class Driver {
 
             // Make the train move
             if (!isDone) {
-                // The train departs from the current station
-                train.depart();
-                
-                // The train moves to the next station
-                train.move();
-                
-                // The train arrives at the current station
-                train.arrive();
-
                 // For each passengers in the train, have them check if they are
                 // ready to alight
                 // If they are, then alight
@@ -110,12 +101,12 @@ public class Driver {
                     passengerToAlight.alight(train);
                 }
 
-                ArrayList<Passenger> passengersToBoard = new ArrayList<>();
-
                 // For each passenger in the queue (in order), have them check if they are
                 // ready to alight
+                ArrayList<Passenger> passengersToBoard = new ArrayList<>();
+
                 for (Passenger passenger : train.getCurrentStation().getPassengers()) {
-                    if (passenger.tryBoard(train)) {
+                    if (passenger.tryBoard(train, train.getPassengers().size() + passengersToBoard.size())) {
                         passengersToBoard.add(passenger);
                     }
                 }
@@ -123,7 +114,15 @@ public class Driver {
                 for (Passenger passengerToBoard : passengersToBoard) {
                     passengerToBoard.board(train);
                 }
+
+                // The train departs from the current station
+                train.depart();
                 
+                // The train moves to the next station
+                train.move();
+                
+                // The train arrives at the current station
+                train.arrive();
             }
         }
         while (!isDone);
