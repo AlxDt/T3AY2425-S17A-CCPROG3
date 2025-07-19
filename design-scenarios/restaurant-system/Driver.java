@@ -14,7 +14,7 @@ public class Driver {
     // In this method, you should load THREE non-beverage items and TWO beverages (up to your creativity what they are) into
     // an ArrayList of the required type. That ArrayList will be the value to return.
     // 
-    // HINT 1: What is the required type? Look at where the return value of initializeStock() is stored.
+    // HINT: What is the required type? Look at where the return value of initializeStock() is stored.
 
 
 
@@ -43,7 +43,7 @@ public class Driver {
     // Hotdog - P94.0 (x0)
     // Soda - P40.0 - Big (x3)
     //
-    // HINT 1: You need to implement the toString() method of the FoodItem class (or your equivalent of that class).
+    // HINT: You need to implement the toString() method of the FoodItem class (or your equivalent of that class).
     //         Within that method, you will need to use the toString() methods of the other classes as well (e.g., Food).
     //         Now, would you need to rewrite parts of the same displaying logic all over again? 
     //         Do not hestitate to inherit as much logic as you can to prevent repitition.
