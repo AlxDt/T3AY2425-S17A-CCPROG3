@@ -10,16 +10,19 @@ public class Passenger {
     }
 
     public boolean tryBoard(Train train, int load) {
-        if (load + 1 <= train.getCapacity()) {
+        if (load + 1 <= train.getRegularCapacity()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void board(Train train) {//add itself
-        train.getCurrentStation().getPassengers().remove(this);
-        train.getPassengers().add(this);
+    public void board(Train train) {
+        // Leave the station
+        this.leaveStation(train);
+
+        // Ride the train
+        train.getRegularPassengers().add(this);
     }
 
     public boolean tryAlight(Train train) { 
@@ -32,21 +35,24 @@ public class Passenger {
     }
 
     public void alight(Train train) {
-        train.getPassengers().remove(this);
+        train.getRegularPassengers().remove(this);
     }
 
+    protected void leaveStation(Train train) {
+        train.getCurrentStation().getPassengers().remove(this);
+    }
         
     @Override
     public String toString() {
         switch (this.destination.getName()) {
             case "Manila":
-                return "1";
+                return "a";
             case "Ortigas":
-                return "2";
+                return "b";
             case "BGC":
-                return "3";
+                return "c";
             case "Makati":
-                return "4";
+                return "d";
             default:
                 return "";
         }

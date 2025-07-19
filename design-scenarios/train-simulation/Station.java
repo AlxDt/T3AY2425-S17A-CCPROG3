@@ -75,7 +75,7 @@ public class Station extends Object {
             // meaning, something other than its original behavior is used
             displayString += train;
         } else {
-            displayString += String.format("%-10s", " ");
+            displayString += String.format("%-21s", " ");
         }
 
         // Display the name of the station

@@ -1,19 +1,35 @@
 import java.util.ArrayList;
 
 public class Train {
-    private final int CAPACITY; 
+    private final int REGULAR_CAPACITY; 
+    private final int PRIORITY_CAPACITY;
+
     private ArrayList<Passenger> passengers;
+    private ArrayList<PriorityPassenger> priorityPassengers;
+
     private Station currentStation;
 
-    public Train(int capacity) {
-        this.CAPACITY = capacity;
+    public Train(int capacity, int priorityCapacity) {
+        this.REGULAR_CAPACITY = capacity;
+        this.PRIORITY_CAPACITY = priorityCapacity;
+
         this.passengers = new ArrayList<>();
+        this.priorityPassengers = new ArrayList<>();
+
         this.currentStation = null;
     }
 
-    public int getCapacity() {
-        return this.CAPACITY;
+    public int getRegularCapacity() {
+        return this.REGULAR_CAPACITY;
     } 
+
+    public int getPriorityCapacity() {
+        return this.PRIORITY_CAPACITY;
+    }
+
+    public int getTotalCapacity() {
+        return this.REGULAR_CAPACITY + this.PRIORITY_CAPACITY;
+    }
 
     public Station getCurrentStation() {
         return this.currentStation;
@@ -35,14 +51,31 @@ public class Train {
         this.currentStation.setTrain(null);
     }
 
-    public ArrayList<Passenger> getPassengers(){
+    public ArrayList<Passenger> getRegularPassengers() {
         return this.passengers;
+    }
+
+    public ArrayList<PriorityPassenger> getPriorityPassengers() {
+        return this.priorityPassengers;
+    }
+
+    public ArrayList<Passenger> getAllPassengers() {
+        ArrayList<Passenger> allPassengers = new ArrayList<>();
+
+        allPassengers.addAll(this.passengers);
+        allPassengers.addAll(this.priorityPassengers);
+
+        return allPassengers;
+    }
+
+    public int getTotalLoad() {
+        return this.passengers.size() + this.priorityPassengers.size();
     }
 
     @Override
     public String toString() {
-        String loadFactor = this.passengers.size() + "/" + this.CAPACITY;
+        String loadFactor = "[R:" + this.passengers.size() + "/" + this.REGULAR_CAPACITY + " P:" + this.priorityPassengers.size() + "/" + this.PRIORITY_CAPACITY + "]";
 
-        return String.format("%-9s", loadFactor) + ">";
+        return String.format("%-20s", loadFactor) + ">";
     }
 }

@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Driver {
     private static final int NUMBER_OF_STATIONS = 4;
-    private static Random randomizer = new Random();
+    private static final Random RANDOMIZER = new Random();
 
     public static void main(String[] args) {
         // Create the train
-        Train train = new Train(10);
+        Train train = new Train(3, 2);
 
         // Create the stations
         Station[] stations = assembleStations(train); 
@@ -36,35 +36,39 @@ public class Driver {
                 System.out.println();
                 System.out.println("What do you want to do?");
                 System.out.println();
-                System.out.println("[1] Add passengers in Manila");
-                System.out.println("[2] Add passengers in Ortigas");
-                System.out.println("[3] Add passengers in BGC");
-                System.out.println("[4] Add passengers in Makati");
-                System.out.println("[R] Add a passenger randomly");
-                System.out.println("[X] End simulation");
+                System.out.println("Add passengers: (use uppercase to add priority passenger)");
+                System.out.println("[a] Add passengers in Manila");
+                System.out.println("[b] Add passengers in Ortigas");
+                System.out.println("[c] Add passengers in BGC");
+                System.out.println("[d] Add passengers in Makati");
+                System.out.println();
+                System.out.println("[r] Add a passenger randomly");
+                System.out.println("[x] End simulation");
                 System.out.println();
                 System.out.print("Or enter a blank line to proceed to the next tick: ");
 
                 // Process user input
                 String response = scanner.nextLine();
+                boolean isPriority = false;
 
-                switch (response.toUpperCase()) {
-                    case "1":
-                    case "2":
-                    case "3":
-                    case "4":
-                        int originNumber = Integer.parseInt(response);
-                        Station originStation = stations[originNumber - 1];
+                switch (response) {
+                    case "A": case "B": case "C": case "D":
+                        response = response.toLowerCase();
+                        isPriority = true;
+                    case "a": case "b": case "c": case "d":
+                        int originNumber = response.charAt(0) - 'a';
+                        Station originStation = stations[originNumber];
 
                         // Add a passenger at the station chosen by the user
                         addPassenger(
                             scanner,
                             originStation,
-                            stations);
+                            stations,
+                            isPriority);
 
                         break;
-                    case "R":
-                        int randomOriginNumber = Driver.randomizer.nextInt(Driver.NUMBER_OF_STATIONS) + 1;
+                    case "r":
+                        int randomOriginNumber = Driver.RANDOMIZER.nextInt(Driver.NUMBER_OF_STATIONS) + 1;
                         Station randomOriginStation = stations[randomOriginNumber - 1];
 
                         // Add a passenger at a random station
@@ -73,7 +77,7 @@ public class Driver {
                             stations);
 
                         break;
-                    case "X":
+                    case "x":
                         isDone = true;
                         break;
                     case "":
@@ -90,9 +94,8 @@ public class Driver {
                 // If they are, then alight
                 ArrayList<Passenger> passengersToAlight = new ArrayList<>();
 
-                for (Passenger passenger: train.getPassengers()) { //Check the comment above
+                for (Passenger passenger: train.getAllPassengers()) {
                     if (passenger.tryAlight(train)){
-                        //passenger.alight(train);
                         passengersToAlight.add(passenger);
                     }  
                 }
@@ -106,7 +109,7 @@ public class Driver {
                 ArrayList<Passenger> passengersToBoard = new ArrayList<>();
 
                 for (Passenger passenger : train.getCurrentStation().getPassengers()) {
-                    if (passenger.tryBoard(train, train.getPassengers().size() + passengersToBoard.size())) {
+                    if (passenger.tryBoard(train, train.getTotalLoad() + passengersToBoard.size())) {
                         passengersToBoard.add(passenger);
                     }
                 }
@@ -178,50 +181,65 @@ public class Driver {
         Station randomDestinationStation;
         
         do {
-            randomDestinationNumber = Driver.randomizer.nextInt(NUMBER_OF_STATIONS) + 1;
+            randomDestinationNumber = Driver.RANDOMIZER.nextInt(NUMBER_OF_STATIONS) + 1;
             randomDestinationStation = stations[randomDestinationNumber - 1];
         }
         while (originStation.getName().equals(randomDestinationStation.getName()));
+
+        boolean isPriority = Driver.RANDOMIZER.nextBoolean();
         
-        Passenger passenger = new Passenger(randomDestinationStation);
+        Passenger passenger
+            = isPriority
+                ? new PriorityPassenger(randomDestinationStation)
+                : new Passenger(randomDestinationStation);
+
         originStation.getPassengers().add(passenger);
     }
 
     private static void addPassenger(
         Scanner scanner,
         Station originStation,
-        Station[] stations
+        Station[] stations,
+        boolean isPriority
     ) {
         // Display the menu for choosing the destination of the passenger to add
         System.out.println();
+
+        if (isPriority) {
+            System.out.println("[PRIORITY]");
+        }
+
         System.out.println("Adding passenger to " + originStation.getName() + "... where is the passenger going?");
         System.out.println();
 
-        System.out.println("[1] Manila");
-        System.out.println("[2] Ortigas");
-        System.out.println("[3] BGC");
-        System.out.println("[4] Makati");
+        System.out.println("[a] Manila");
+        System.out.println("[b] Ortigas");
+        System.out.println("[c] BGC");
+        System.out.println("[d] Makati");
         System.out.println("[R] Randomly choose a destination");
         System.out.println();
 
         // Process the input
-        String destination = scanner.nextLine();
+        String response = scanner.nextLine();
+        response = response.toUpperCase();
+
         Station destinationStation = null;
 
-        switch (destination.toUpperCase()) {
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-                int destinationNumber = Integer.parseInt(destination);
-                destinationStation = stations[destinationNumber - 1];
+        switch (response) {
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+                int destinationNumber = response.charAt(0) - 'A';
+                destinationStation = stations[destinationNumber];
 
                 break;
             case "R":
                 int randomDestinationNumber;
                 
+                
                 do {
-                    randomDestinationNumber = Driver.randomizer.nextInt(NUMBER_OF_STATIONS) + 1;
+                    randomDestinationNumber = Driver.RANDOMIZER.nextInt(NUMBER_OF_STATIONS) + 1;
                     destinationStation = stations[randomDestinationNumber - 1];
                 }
                 while (originStation.getName().equals(destinationStation.getName()));
@@ -245,7 +263,11 @@ public class Driver {
 
                 scanner.nextLine();
             } else {
-                Passenger passenger = new Passenger(destinationStation);
+                Passenger passenger
+                    = isPriority
+                        ? new PriorityPassenger(destinationStation)
+                        : new Passenger(destinationStation);
+
                 originStation.getPassengers().add(passenger);
             }
         }
