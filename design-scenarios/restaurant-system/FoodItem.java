@@ -20,4 +20,9 @@ public class FoodItem {
     public int getStock() {
         return this.stock;
     }
+
+    @Override
+    public String toString() {
+        return this.food + " - (x" + this.stock + ")";
+    }
 }
