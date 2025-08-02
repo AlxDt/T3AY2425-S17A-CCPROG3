@@ -1,4 +1,4 @@
-public class Food {
+public abstract class Food {
     private String name; 
     private double price;
 
@@ -10,8 +10,17 @@ public class Food {
         this.price = price;
     }
 
+    public double getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return this.name + " - P" + this.price;
     }
 }
+

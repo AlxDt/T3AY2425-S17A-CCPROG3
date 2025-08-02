@@ -1,4 +1,4 @@
-public class Beverage extends Food {
+public abstract class Beverage extends Food {
     private Size size;
 
     public Beverage(
@@ -16,7 +16,7 @@ public class Beverage extends Food {
     }
 
     @Override
-    public String toString() {
+    public String toString() {  
         return super.toString() + " - " + this.size;
     }
 }
